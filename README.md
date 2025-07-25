@@ -38,10 +38,10 @@ Taskify, kullanıcıların görev oluşturup yönetebileceği bir görev takip u
    cd TaskifyBackend
 2. application.properties dosyasını yapılandır:
  ```bash
-- spring.datasource.url=jdbc:mysql://localhost:3306/taskify
-- spring.datasource.username=root
-- spring.datasource.password=senin_sifren
-- jwt.secret=ozel_bir_jwt_secret
+   - spring.datasource.url=jdbc:mysql://localhost:3306/taskify
+   - spring.datasource.username=root
+   - spring.datasource.password=senin_sifren
+   - jwt.secret=ozel_bir_jwt_secret
 ```
 3. Projeyi çalıştır:
    ```bash
