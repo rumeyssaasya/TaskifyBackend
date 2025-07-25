@@ -43,6 +43,7 @@ Taskify, kullanıcıların görev oluşturup yönetebileceği bir görev takip u
 - jwt.secret=ozel_bir_jwt_secret
 
 2. Projeyi çalıştır:
+   ```bash
    ./mvnw spring-boot:run 
 
 POST	/auth/register	Yeni kullanıcı kaydı
