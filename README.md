@@ -37,10 +37,10 @@ Taskify, kullanıcıların görev oluşturup yönetebileceği bir görev takip u
    git clone https://github.com/rumeyssaasya/TaskifyBackend.git
    cd TaskifyBackend
 
-spring.datasource.url=jdbc:mysql://localhost:3306/taskify
-spring.datasource.username=root
-spring.datasource.password=senin_sifren
-jwt.secret=ozel_bir_jwt_secret
+- spring.datasource.url=jdbc:mysql://localhost:3306/taskify
+- spring.datasource.username=root
+- spring.datasource.password=senin_sifren
+- jwt.secret=ozel_bir_jwt_secret
 
 2. Projeyi çalıştır:
    ./mvnw spring-boot:run 
