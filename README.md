@@ -36,13 +36,14 @@ Taskify, kullanıcıların görev oluşturup yönetebileceği bir görev takip u
    ```bash
    git clone https://github.com/rumeyssaasya/TaskifyBackend.git
    cd TaskifyBackend
-
+2. application.properties dosyasını yapılandır:
+ ```bash
 - spring.datasource.url=jdbc:mysql://localhost:3306/taskify
 - spring.datasource.username=root
 - spring.datasource.password=senin_sifren
 - jwt.secret=ozel_bir_jwt_secret
-
-2. Projeyi çalıştır:
+```
+3. Projeyi çalıştır:
    ```bash
    ./mvnw spring-boot:run 
 
