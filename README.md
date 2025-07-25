@@ -47,9 +47,9 @@ Taskify, kullanıcıların görev oluşturup yönetebileceği bir görev takip u
    ```bash
    ./mvnw spring-boot:run 
 
-POST	/auth/register	Yeni kullanıcı kaydı
-POST	/auth/login	Giriş ve token alma
-GET	/tasks	Görevleri listeleme
-POST	/tasks	Yeni görev oluşturma
-PUT	/tasks/{id}	Görev güncelleme
-DELETE	/tasks/{id}	Görev silme
+- POST	/auth/register	Yeni kullanıcı kaydı
+- POST	/auth/login	Giriş ve token alma
+- GET	/tasks	Görevleri listeleme
+- POST	/tasks	Yeni görev oluşturma
+- PUT	/tasks/{id}	Görev güncelleme
+- DELETE	/tasks/{id}	Görev silme
