@@ -33,9 +33,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String path = request.getServletPath();
 
         // Auth işlemleri için JWT kontrolünü pas geç
-        if (path.startsWith("/api/auth/register") ||
-            path.startsWith("/api/auth/login") ||
-            path.startsWith("/api/auth/verify")) {
+        if (path.startsWith("/auth/register") ||
+            path.startsWith("/auth/login") ||
+            path.startsWith("/auth/verify") ||
+            path.startsWith("/auth/resend-verification")) {
             filterChain.doFilter(request, response);
             return;
         }

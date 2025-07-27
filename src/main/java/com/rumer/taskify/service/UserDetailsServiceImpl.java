@@ -18,14 +18,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     // Kullanıcıyı veritabanından username ile bul
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
+        return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Kullanıcı bulunamadı: " + username));
-        // Assuming User does not implement UserDetails, map it to org.springframework.security.core.userdetails.User
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
-                .password(user.getPassword())
-                .authorities("USER") // Replace with user.getRoles() if available
-                .build();
-}
+    }
 
 }
