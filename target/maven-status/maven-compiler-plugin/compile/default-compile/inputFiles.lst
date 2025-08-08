@@ -1,9 +1,11 @@
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\config\SecurityConfig.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\controller\AuthController.java
+C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\controller\ProfileController.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\controller\ProjectController.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\controller\TaskController.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\TaskRequest.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\TaskResponse.java
+C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\UserProfile.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\UserRegister.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\model\Project.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\model\Task.java
@@ -19,4 +21,5 @@ C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\service\E
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\service\ProjectService.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\service\TaskService.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\service\UserDetailsServiceImpl.java
+C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\service\UserService.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\TaskifyApplication.java
