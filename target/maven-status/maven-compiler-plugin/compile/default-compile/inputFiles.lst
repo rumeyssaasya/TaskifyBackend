@@ -3,10 +3,14 @@ C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\controlle
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\controller\ProfileController.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\controller\ProjectController.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\controller\TaskController.java
+C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\ForgotPasswordRequest.java
+C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\ResetPasswordRequest.java
+C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\ShareProjectUsers.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\TaskRequest.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\TaskResponse.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\UserProfile.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\dto\UserRegister.java
+C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\mapper\ProjectMapper.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\model\Project.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\model\Task.java
 C:\Users\aciog\Desktop\taskify\taskify\src\main\java\com\rumer\taskify\model\User.java
