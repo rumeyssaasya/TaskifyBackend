@@ -11,15 +11,15 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    @Value("${app.backend-base-url:https://taskifybackendapi-production.up.railway.app}")
-    private String backendBaseUrl;
+    @Value("${app.backend-base-url:https://}")
+    private String frontendBaseUrl;
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
     public void sendVerificationEmail(String to, String token) {
         String subject = "Taskify Hesap Doğrulama";
-        String verificationLink = backendBaseUrl + "/auth/verify?token=" + token;
+        String verificationLink = frontendBaseUrl + "/auth/verify?token=" + token;
         String body = "Merhaba,\n\nHesabınızı doğrulamak için lütfen aşağıdaki linke tıklayın:\n" 
                   + verificationLink + "\n\nBu link 5 dakika geçerlidir.\n\nBu mail adresi otomatik gönderilmiştir, yanıt vermeyiniz."+"\nhttps://rumer.tr/";
 
@@ -31,7 +31,7 @@ public class EmailService {
     }
 
     public void sendResetPasswordEmail(String toEmail, String token) {
-        String resetLink = backendBaseUrl + "/auth/reset-password?token=" + token;
+        String resetLink = frontendBaseUrl + "/auth/reset-password?token=" + token;
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
         message.setSubject("Şifre Sıfırlama Talebi");
