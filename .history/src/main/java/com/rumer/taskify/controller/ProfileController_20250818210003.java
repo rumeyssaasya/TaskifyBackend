@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,7 +57,8 @@ public class ProfileController {
         if (userOpt.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        
+
+        User updatedUser = userService.updateProfile(userOpt.get(), profileDTO.getFullName(), profileDTO.getProfileImageUrl());
         return ResponseEntity.ok("Profil güncellendi.");
     }
 
