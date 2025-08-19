@@ -2,9 +2,6 @@ package com.rumer.taskify.controller;
 
 
 import com.rumer.taskify.service.UserService;
-
-import io.jsonwebtoken.io.IOException;
-
 import com.rumer.taskify.dto.ForgotPasswordRequest;
 import com.rumer.taskify.dto.ResetPasswordRequest;
 import com.rumer.taskify.model.User;
@@ -12,7 +9,6 @@ import com.rumer.taskify.repository.UserRepository;
 import com.rumer.taskify.security.JwtUtils;
 import com.rumer.taskify.service.EmailService;
 
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -108,44 +104,48 @@ public class AuthController {
     }
 
     @GetMapping("/verify")
-    public ResponseEntity<?> verifyEmail(@RequestParam("token") String token, HttpServletResponse response) throws IOException, java.io.IOException {
+    public ResponseEntity<?> verifyEmail(@RequestParam("token") String token) {
+        // Token parametresinin boş olup olmadığını kontrol et
         if (token == null || token.trim().isEmpty()) {
             return ResponseEntity.badRequest().body("Doğrulama token'ı gereklidir.");
         }
 
+        // Token'ı temizle (başındaki ve sonundaki boşlukları kaldır)
         String cleanToken = token.trim();
-        Optional<User> userOpt = userRepository.findByVerificationToken(cleanToken);
 
+        Optional<User> userOpt = userRepository.findByVerificationToken(cleanToken);
+        
         if (userOpt.isEmpty()) {
             return ResponseEntity.badRequest().body("Geçersiz doğrulama token'ı.");
         }
-
+        
         User user = userOpt.get();
+        
+        // Token süresini kontrol et (5 dakika)
         LocalDateTime tokenCreated = user.getVerificationTokenCreatedAt();
         if (tokenCreated == null) {
             return ResponseEntity.badRequest().body("Token oluşturma tarihi bulunamadı.");
         }
-
-        if (tokenCreated.plusMinutes(5).isBefore(LocalDateTime.now())) {
-            userRepository.delete(user); // Süresi geçmiş kullanıcıyı sil
-            return ResponseEntity.badRequest().body("Token süresi geçmiş. Lütfen tekrar kayıt olun.");
+        
+        // 5 dakika süre kontrolü
+        LocalDateTime expiryTime = tokenCreated.plusMinutes(5);
+        LocalDateTime now = LocalDateTime.now();
+        
+        if (expiryTime.isBefore(now)) {
+            return ResponseEntity.badRequest().body("Token süresi geçmiş. Lütfen yeni bir doğrulama e-postası talep edin.");
         }
 
+        // Kullanıcı zaten doğrulanmış mı kontrol et
         if (user.isEnabled()) {
             return ResponseEntity.badRequest().body("Bu hesap zaten doğrulanmış.");
         }
-
-        // Başarılı doğrulama
         user.setEnabled(true);
         user.setVerificationToken(null);
         user.setVerificationTokenCreatedAt(null);
         userRepository.save(user);
 
-        // Sadece başarılı ise login sayfasına yönlendir
-        response.sendRedirect("https://rumer.tr/auth/login");
-        return null; // response zaten yönlendirdiği için body döndürmeye gerek yok
+        return response.sendRedirect("https://rumer.tr/auth/login?success=verified");
     }
-
 
     // Kullanıcı giriş endpoint'i, başarılı olursa JWT token döner
     @PostMapping("/login")

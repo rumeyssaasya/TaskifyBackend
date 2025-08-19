@@ -108,44 +108,39 @@ public class AuthController {
     }
 
     @GetMapping("/verify")
-    public ResponseEntity<?> verifyEmail(@RequestParam("token") String token, HttpServletResponse response) throws IOException, java.io.IOException {
+    public void verifyEmail(@RequestParam("token") String token, HttpServletResponse response) throws IOException, java.io.IOException {
         if (token == null || token.trim().isEmpty()) {
-            return ResponseEntity.badRequest().body("Doğrulama token'ı gereklidir.");
+            response.sendRedirect("https://rumer.tr/auth/login?error=token_invalid");
+            return;
         }
 
         String cleanToken = token.trim();
         Optional<User> userOpt = userRepository.findByVerificationToken(cleanToken);
 
         if (userOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Geçersiz doğrulama token'ı.");
+            response.sendRedirect("https://rumer.tr/auth/login?error=token_invalid");
+            return;
         }
 
         User user = userOpt.get();
+
         LocalDateTime tokenCreated = user.getVerificationTokenCreatedAt();
-        if (tokenCreated == null) {
-            return ResponseEntity.badRequest().body("Token oluşturma tarihi bulunamadı.");
+        if (tokenCreated == null || tokenCreated.plusMinutes(5).isBefore(LocalDateTime.now())) {
+            userRepository.delete(user); // Token süresi geçmişse kullanıcıyı sil
+            response.sendRedirect("https://rumer.tr/auth/login?error=token_expired");
+            return;
         }
 
-        if (tokenCreated.plusMinutes(5).isBefore(LocalDateTime.now())) {
-            userRepository.delete(user); // Süresi geçmiş kullanıcıyı sil
-            return ResponseEntity.badRequest().body("Token süresi geçmiş. Lütfen tekrar kayıt olun.");
+        if (!user.isEnabled()) {
+            user.setEnabled(true);
+            user.setVerificationToken(null);
+            user.setVerificationTokenCreatedAt(null);
+            userRepository.save(user);
         }
 
-        if (user.isEnabled()) {
-            return ResponseEntity.badRequest().body("Bu hesap zaten doğrulanmış.");
-        }
-
-        // Başarılı doğrulama
-        user.setEnabled(true);
-        user.setVerificationToken(null);
-        user.setVerificationTokenCreatedAt(null);
-        userRepository.save(user);
-
-        // Sadece başarılı ise login sayfasına yönlendir
-        response.sendRedirect("https://rumer.tr/auth/login");
-        return null; // response zaten yönlendirdiği için body döndürmeye gerek yok
+        // Başarılı doğrulamada login sayfasına yönlendir
+        response.sendRedirect("https://rumer.tr/auth/login?success=verified");
     }
-
 
     // Kullanıcı giriş endpoint'i, başarılı olursa JWT token döner
     @PostMapping("/login")
