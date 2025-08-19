@@ -103,6 +103,8 @@ public class AuthController {
         return ResponseEntity.ok("Kayıt başarılı. Lütfen e-postanızı kontrol edin.");
     }
 
+
+    // E-posta doğrulama endpoint'i
     @GetMapping("/verify")
     public ResponseEntity<?> verifyEmail(@RequestParam("token") String token) {
         // Token parametresinin boş olup olmadığını kontrol et
