@@ -110,25 +110,25 @@ public class AuthController {
     @GetMapping("/verify")
     public ResponseEntity<?> verifyEmail(@RequestParam("token") String token, HttpServletResponse response) throws IOException, java.io.IOException {
         if (token == null || token.trim().isEmpty()) {
-            return ResponseEntity.badRequest().body("Doğrulama süresi geçmiş. Lütfen tekrar kayıt olun.");
+            return ResponseEntity.badRequest().body("Yeniden kayıt olmanız gerekiyor.");
         }
 
         String cleanToken = token.trim();
         Optional<User> userOpt = userRepository.findByVerificationToken(cleanToken);
 
         if (userOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Doğrulama süresi geçmiş. Lütfen tekrar kayıt olun.");
+            return ResponseEntity.badRequest().body("Yeniden kayıt olmanız gerekiyor.");
         }
 
         User user = userOpt.get();
         LocalDateTime tokenCreated = user.getVerificationTokenCreatedAt();
         if (tokenCreated == null) {
-            return ResponseEntity.badRequest().body("Doğrulama süresi geçmiş. Lütfen tekrar kayıt olun.");
+            return ResponseEntity.badRequest().body("Token oluşturma tarihi bulunamadı.");
         }
 
         if (tokenCreated.plusMinutes(5).isBefore(LocalDateTime.now())) {
             userRepository.delete(user); // Süresi geçmiş kullanıcıyı sil
-            return ResponseEntity.badRequest().body("Doğrulama süresi geçmiş. Lütfen tekrar kayıt olun.");
+            return ResponseEntity.badRequest().body("Token süresi geçmiş. Lütfen tekrar kayıt olun.");
         }
 
         if (user.isEnabled()) {
