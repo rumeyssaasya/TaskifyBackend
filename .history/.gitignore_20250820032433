@@ -1,0 +1,24 @@
+# Maven / Gradle build klasörleri
+/target/
+/build/
+
+# IDE
+/.idea/
+/*.iml
+/.classpath
+/.project
+/.settings/
+
+# Log dosyaları
+*.log
+
+# OS dosyaları
+.DS_Store
+
+# Upload edilen kullanıcı dosyaları
+uploads/
+
+# Özel konfigürasyon dosyaları
+application.properties
+application.yml
+.env
